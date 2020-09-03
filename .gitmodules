@@ -1,0 +1,3 @@
+[submodule "datasets/git"]
+	path = datasets/anime-face-detector
+	url = https://github.com/qhgz2013/anime-face-detector
