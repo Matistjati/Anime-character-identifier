@@ -1,0 +1,7 @@
+run.bat
+venv/
+cp.ckpt.data-00000-of-00001
+cp.ckpt.index
+checkpoint
+datasets/anime-face-detector/
+datasets/datasets/

@@ -1,0 +1,1 @@
+This is where progress is saved. If I ever make a full release, I will include a link to google drive with the trained checkpoint
