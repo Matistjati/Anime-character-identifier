@@ -21,7 +21,7 @@ limit = 2500
               ("megumin", "megumin"), ("rem_%28re%3azero%29", "rem"), ("hakurei_reimu", "reimu hakurei"),
               ("hatsune_miku", "hatsune miku")]"""
 
-characters = [("aqua_%28konosuba%29","aqua"), ("hakurei_reimu", "reimu hakurei")]
+characters = [("aqua_%28konosuba%29","aqua"), ("hakurei_reimu", "reimu hakurei"), ("cirno", "cirno")]
 
 def save_image(thumbnail, i, folder_name):
     linkContainer = thumbnail.findChildren("span", recursive=False)[0].findChildren("a", recurisve=False)[0]

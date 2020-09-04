@@ -167,20 +167,21 @@ def save_image(thumbnail, i, folder_name):
 def get_dataset_path(character):
     return f"datasets/{dataset_name}/{character[1]}/"
 
-limit = 500
+limit = 700
 
-dataset_name = "hatsune fubuki face"
+dataset_name = "aqua reimu face"
 """characters = [("aqua_%28konosuba%29","aqua"), ("shirakami_fubuki", "fubuki"), ("makise_kurisu", "makise kurisu"),
               ("megumin", "megumin"), ("rem_%28re%3azero%29", "rem"), ("hakurei_reimu", "reimu hakurei"),
               ("hatsune_miku", "hatsune miku")]"""
 
-characters = [("hatsune_miku", "hatsune miku"),("shirakami_fubuki", "fubuki")]
-
+#characters = [("hatsune_miku", "hatsune miku"),("shirakami_fubuki", "fubuki"), ("cirno", "cirno")]
+characters = [("hatsune_miku", "hatsune miku")]
+extra_tags = "blue_hair"
 
 
 executor = ThreadPoolExecutor(limit)
 for character in characters:
-    i = 0
+    i = 350
     if not os.path.exists(get_dataset_path(character)):
         os.makedirs(get_dataset_path(character))
 
@@ -192,7 +193,7 @@ for character in characters:
             if i > limit:
                 break
 
-            r = requests.get(f"https://gelbooru.com/index.php?page=post&s=list&tags=1girl+-1boy+-2boys+-3boys+-4boys+-5boys+-6boys+-6boys+-greyscale+-grayscale+-double_handjob+-buttjob+-vore+-handjob+-fellatio+-picture_(object)+-character_doll+-pov_feet+-:i+-choroidoragon+-explosion+-3d+-fake_cover+-pow+-artist_name+-satou_kazuma+-penis+-close-up+-lower_body+-monochrome+-ass_focus+-asuna_%28sao-alo%29+-copyright_name+-multiple_views+-eyepatch_removed+-from_behind+-double_penetration+-futanari+-futa+-cum+-cum_in_mouth+-multiple_boys+-multiple_girls+-crying+-crying_with_eyes_open+-hole_in_wall+-cosplay+-looking_back+-speech_bubble+-yamcha_pose+-alternative_costume+-alternate_costume+-alternate_costume+-1other+-2others+-3others+-4others+-5others+-japanese_text+-crossover+-tentacle+-tentacles+-sequential+-partial_commentary+-tentacle_sex+-partially_colored+-partial_penetration+-toilet+->o<+-faceless+->_<+-:/+-beastiality+-god+-origami+-head_out_of_frame+-lamia+-scales+-chibi+-;d+-meme+-partially_translated+-crossover%2B+{character[0]}&pid=" + str(i))
+            r = requests.get(f"https://gelbooru.com/index.php?page=post&s=list&tags=1girl+-1boy+-2boys+-3boys+-4boys+-5boys+-6boys+-6boys+-greyscale+-grayscale+-double_handjob+-buttjob+-vore+-handjob+-fellatio+-picture_(object)+-character_doll+-pov_feet+-:i+-choroidoragon+-explosion+-3d+-fake_cover+-pow+-artist_name+-satou_kazuma+-penis+-close-up+-lower_body+-monochrome+-ass_focus+-asuna_%28sao-alo%29+-copyright_name+-multiple_views+-eyepatch_removed+-from_behind+-double_penetration+-futanari+-futa+-cum+-cum_in_mouth+-multiple_boys+-multiple_girls+-crying+-crying_with_eyes_open+-hole_in_wall+-cosplay+-looking_back+-speech_bubble+-yamcha_pose+-alternative_costume+-alternate_costume+-alternate_costume+-1other+-2others+-3others+-4others+-5others+-japanese_text+-crossover+-tentacle+-tentacles+-sequential+-partial_commentary+-tentacle_sex+-partially_colored+-partial_penetration+-toilet+->o<+-faceless+->_<+-:/+-beastiality+-god+-origami+-head_out_of_frame+-lamia+-scales+-chibi+-;d+-meme+-partially_translated+-crossover%2B+{extra_tags}+{character[0]}&pid=" + str(i))
             parsed_html = BeautifulSoup(r.text, "html.parser")
             thumbnail_container = parsed_html.find('div', {'class': 'thumbnail-container'})
             thumbnails = thumbnail_container.find_all("div", {'class': 'thumbnail-preview poopC'})

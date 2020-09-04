@@ -21,10 +21,10 @@ img_height = 256
 img_width = 256
 
 dataset_name = "aqua reimu face"
-dataset_path = f"datasets/datasets/{dataset_name}"
+dataset_path = f"datasets/datasets/{dataset_name}/"
 
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-  dataset_name,
+  dataset_path,
   validation_split=0.2,
   subset="training",
   seed=123,
@@ -32,7 +32,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   batch_size=batch_size)
 
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    dataset_name,
+    dataset_path,
     validation_split=0.2,
     subset="validation",
     seed=123,
