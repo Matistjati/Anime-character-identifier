@@ -85,16 +85,11 @@ def save_image_cropped(link, file_name):
     start_output_number = 0
     extra_size = 0.069
 
-    result = {}
     file = requests.get(link).content
 
     nparr = np.frombuffer(file, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)  # cv2.IMREAD_COLOR in OpenCV 3.1
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-    # CV
-    #img = cv.CreateImageHeader((img_np.shape[1], img_np.shape[0]), cv.IPL_DEPTH_8U, 3)
-    #cv.SetData(img, img_np.tostring(), img_np.dtype.itemsize * 3 * img_np.shape[1])
-    #img = cv2.imread(img_np)
     scores, boxes = detect(sess, net, img)
     boxes = boxes[:, 4:8]
     scores = scores[:, 1]
@@ -105,22 +100,11 @@ def save_image_cropped(link, file_name):
     scores = scores[inds]
     boxes = boxes[inds, :]
 
-    result[file] = []
-
     if scores.shape[0] > 1:
         return
 
     for i in range(scores.shape[0]):
         x1, y1, x2, y2 = boxes[i, :].tolist()
-        new_result = {'score': float(scores[i]),
-                      'bbox': [x1, y1, x2, y2]}
-        result[file].append(new_result)
-
-
-        #print("Saving")
-        #print(x1,x2,y1,y2)
-
-        #print(img.shape)
 
         min_side = min(img.shape[0], img.shape[1])
         x1 -= min_side * extra_size
@@ -144,7 +128,7 @@ def save_image_cropped(link, file_name):
         start_output_number += 1
 
 
-def save_image(thumbnail, i, folder_name):
+def save_image(thumbnail, folder_name):
     linkContainer = thumbnail.findChildren("span", recursive=False)[0].findChildren("a", recurisve=False)[0]
     href = linkContainer.attrs["href"]
     href = href[2:]
@@ -156,7 +140,7 @@ def save_image(thumbnail, i, folder_name):
     final_link = right_col.findChildren("div", recursive=True)[0].findChildren("img", recursive=False)[0].attrs["src"]
     startIndex = href.find("id=") + 3
     name = ""
-    for o in range(20):
+    for o in range(3):
         n = href[o+startIndex]
         if n.isdigit():
             name += n
